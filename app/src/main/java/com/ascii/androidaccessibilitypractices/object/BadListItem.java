@@ -26,6 +26,16 @@ public class BadListItem {
 		items.add(new BadListItem("Item 8", "Item Description 8"));
 		items.add(new BadListItem("項目玖", "項目描述玖"));
 		items.add(new BadListItem("Item 10", "Item Description 10"));
+		items.add(new BadListItem("項目拾壹", "項目描述拾壹"));
+		items.add(new BadListItem("Item 12", "Item Description 12"));
+		items.add(new BadListItem("項目拾參", "項目描述拾參"));
+		items.add(new BadListItem("Item 14", "Item Description 14"));
+		items.add(new BadListItem("項目拾伍", "項目描述拾伍"));
+		items.add(new BadListItem("Item 16", "Item Description 16"));
+		items.add(new BadListItem("項目拾柒", "項目描述拾柒"));
+		items.add(new BadListItem("Item 18", "Item Description 18"));
+		items.add(new BadListItem("項目拾玖", "項目描述拾玖"));
+		items.add(new BadListItem("Item 20", "Item Description 20"));
 
 		return items;
 	}

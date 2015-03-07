@@ -3,10 +3,12 @@ package com.ascii.androidaccessibilitypractices.fragment;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.ascii.androidaccessibilitypractices.DrawerToggleHandler;
 import com.ascii.androidaccessibilitypractices.MainActivity;
 import com.ascii.androidaccessibilitypractices.R;
 
@@ -36,13 +38,22 @@ public class PlaceholderFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+		ActionBarActivity activity = (ActionBarActivity) getActivity();
+		activity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+		activity.getSupportActionBar().setIcon(R.drawable.icon_shape_transparent);
 		return rootView;
 	}
 
 	@Override
+	public void onResume() {
+		DrawerToggleHandler handler = (DrawerToggleHandler) getActivity();
+		handler.setDrawerEnabled(false);
+		super.onResume();
+	}
+
+	@Override
 	public void onAttach(Activity activity) {
+		((DrawerToggleHandler) activity).setActionBarTitle("Place");
 		super.onAttach(activity);
-		((MainActivity) activity).onSectionAttached(
-				getArguments().getInt(ARG_SECTION_NUMBER));
 	}
 }
