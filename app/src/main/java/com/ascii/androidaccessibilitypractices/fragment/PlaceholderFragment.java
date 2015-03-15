@@ -27,6 +27,7 @@ public class PlaceholderFragment extends Fragment {
 		PlaceholderFragment fragment = new PlaceholderFragment();
 		Bundle args = new Bundle();
 		args.putInt(ARG_SECTION_NUMBER, sectionNumber);
+		
 		fragment.setArguments(args);
 		return fragment;
 	}

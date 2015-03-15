@@ -32,6 +32,8 @@ public class MainActivity extends ActionBarActivity
 		mNavigationDrawerFragment.setUp(
 				R.id.navigation_drawer,
 				(DrawerLayout) findViewById(R.id.drawer_layout));
+
+		this.setTitle(getString(R.string.app_main_description));
 	}
 
 	@Override
@@ -41,15 +43,15 @@ public class MainActivity extends ActionBarActivity
 
 		if (position == 0) {
 			fragmentManager.beginTransaction()
-					.replace(R.id.container, new BadListPracticeFragment())
+					.replace(R.id.container, new CustomViewPracticeFragment())
 					.commit();
 		} else if (position == 1) {
 			fragmentManager.beginTransaction()
-					.replace(R.id.container, new GridPracticeFragment())
+					.replace(R.id.container, new BadListPracticeFragment())
 					.commit();
 		} else if (position == 2) {
 			fragmentManager.beginTransaction()
-					.replace(R.id.container, new CustomViewPracticeFragment())
+					.replace(R.id.container, new GridPracticeFragment())
 					.commit();
 		} else {
 			fragmentManager.beginTransaction()
@@ -69,7 +71,6 @@ public class MainActivity extends ActionBarActivity
 	public void restoreActionBar() {
 		ActionBar actionBar = getSupportActionBar();
 		actionBar.setDisplayShowTitleEnabled(true);
-//		actionBar.setDisplayHomeAsUpEnabled(true);
 		actionBar.setTitle(mTitle);
 	}
 

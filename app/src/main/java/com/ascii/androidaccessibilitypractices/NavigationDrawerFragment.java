@@ -11,15 +11,19 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.accessibility.AccessibilityEvent;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 /**
@@ -86,6 +90,51 @@ public class NavigationDrawerFragment extends Fragment {
 		setHasOptionsMenu(true);
 	}
 
+	private class DrawerItemAdapter extends BaseAdapter {
+
+		String[] drawerItems = new String[] {
+				getString(R.string.title_section1),
+				getString(R.string.title_section2),
+				getString(R.string.title_section3),
+		};
+
+		String[] drawerItemDescriptions = new String[] {
+				getString(R.string.description_section1),
+				getString(R.string.description_section2),
+				getString(R.string.description_section3),
+		};
+
+		@Override
+		public int getCount() {
+			return drawerItems.length;
+		}
+
+		@Override
+		public Object getItem(int position) {
+			return drawerItems[position];
+		}
+
+		@Override
+		public long getItemId(int position) {
+			return position;
+		}
+
+		@Override
+		public View getView(int position, View convertView, ViewGroup parent) {
+			TextView textView;
+			if (convertView == null) {
+				textView = new TextView(getActivity());
+				textView.setPadding(40, 40, 40, 40);
+				textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20);
+			} else {
+				textView = (TextView) convertView;
+			}
+			textView.setText(drawerItems[position]);
+			textView.setContentDescription(drawerItemDescriptions[position]);
+			return textView;
+		}
+	};
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
@@ -97,15 +146,19 @@ public class NavigationDrawerFragment extends Fragment {
 				selectItem(position);
 			}
 		});
-		mDrawerListView.setAdapter(new ArrayAdapter<String>(
-				getActionBar().getThemedContext(),
-				android.R.layout.simple_list_item_activated_1,
-				android.R.id.text1,
-				new String[]{
-						getString(R.string.title_section1),
-						getString(R.string.title_section2),
-						getString(R.string.title_section3),
-				}));
+
+//		mDrawerListView.setAdapter(new ArrayAdapter<String>(
+//				getActionBar().getThemedContext(),
+//				android.R.layout.simple_list_item_activated_1,
+//				android.R.id.text1,
+//				new String[]{
+//						getString(R.string.title_section1),
+//						getString(R.string.title_section2),
+//						getString(R.string.title_section3),
+//				}));
+
+		mDrawerListView.setPadding(0, 100, 0, 0);
+		mDrawerListView.setAdapter(new DrawerItemAdapter());
 		mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
 		return mDrawerListView;
 	}
