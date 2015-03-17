@@ -26,6 +26,12 @@
 			android:layout_height="wrap_content"
 			android:text="@string/default_button_text"/>
 
+		<com.ascii.androidaccessibilitypractices.SimpleCoverViewBase
+			android:layout_width="300dp"
+			android:layout_height="300dp"
+			android:layout_margin="15dp">
+		</com.ascii.androidaccessibilitypractices.SimpleCoverViewBase>
+
 		<com.ascii.androidaccessibilitypractices.SimpleCoverViewA
 			android:layout_width="300dp"
 			android:layout_height="300dp"
