@@ -1,5 +1,6 @@
 package com.ascii.androidaccessibilitypractices;
 
+import android.content.Context;
 import android.support.v7.app.ActionBarActivity;
 import android.app.Activity;
 import android.support.v7.app.ActionBar;
@@ -92,6 +93,8 @@ public class NavigationDrawerFragment extends Fragment {
 
 	private class DrawerItemAdapter extends BaseAdapter {
 
+		private LayoutInflater inflater;
+
 		String[] drawerItems = new String[] {
 				getString(R.string.title_section1),
 				getString(R.string.title_section2),
@@ -103,6 +106,10 @@ public class NavigationDrawerFragment extends Fragment {
 				getString(R.string.description_section2),
 				getString(R.string.description_section3),
 		};
+
+		public DrawerItemAdapter(Context context) {
+			inflater = LayoutInflater.from(context);
+		}
 
 		@Override
 		public int getCount() {
@@ -121,17 +128,14 @@ public class NavigationDrawerFragment extends Fragment {
 
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
-			TextView textView;
 			if (convertView == null) {
-				textView = new TextView(getActivity());
-				textView.setPadding(40, 40, 40, 40);
-				textView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 20);
-			} else {
-				textView = (TextView) convertView;
+				convertView = inflater.inflate(
+						android.R.layout.simple_list_item_activated_1,
+						parent, false);
 			}
-			textView.setText(drawerItems[position]);
-			textView.setContentDescription(drawerItemDescriptions[position]);
-			return textView;
+			((TextView) convertView).setText(drawerItems[position]);
+			convertView.setContentDescription(drawerItemDescriptions[position]);
+			return convertView;
 		}
 	};
 
@@ -158,7 +162,7 @@ public class NavigationDrawerFragment extends Fragment {
 //				}));
 
 		mDrawerListView.setPadding(0, 100, 0, 0);
-		mDrawerListView.setAdapter(new DrawerItemAdapter());
+		mDrawerListView.setAdapter(new DrawerItemAdapter(getActivity()));
 		mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
 		return mDrawerListView;
 	}
